@@ -4,16 +4,16 @@ import {
   SidebarMenuSub,
   SidebarMenuSubItem,
   useSidebar,
-} from '@/components/ui/sidebar';
-import { Link } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
+} from '@/components/ui/sidebar'
+import { Link } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '@/components/ui/collapsible';
-import { ChevronDown, ChevronRight } from 'lucide-react';
-import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip';
+} from '@/components/ui/collapsible'
+import { ChevronDown, ChevronRight } from 'lucide-react'
+import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
 
 const AppMenuItems = ({
   key,
@@ -23,28 +23,28 @@ const AppMenuItems = ({
   openKey,
   setOpenKey,
 }) => {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-  const { state } = useSidebar();
+  const [hoveredIndex, setHoveredIndex] = useState(null)
+  const { state } = useSidebar()
 
-  const subMenuOpen = openKey === item.title;
+  const subMenuOpen = openKey === item.title
 
   const handleMenuButtonClick = (event, item) => {
-    event.stopPropagation();
+    event.stopPropagation()
     if (subMenuOpen) {
-      setOpenKey(null);
+      setOpenKey(null)
     } else {
-      setOpenKey(item.title);
+      setOpenKey(item.title)
     }
     if (!item.items) {
-      setActiveMenu(item);
+      setActiveMenu(item)
     }
-  };
+  }
 
   useEffect(() => {
     if (state == 'collapsed' && !isSidebarHovered) {
-      setOpenKey(null);
+      setOpenKey(null)
     }
-  }, [state, isSidebarHovered, setOpenKey]);
+  }, [state, isSidebarHovered, setOpenKey])
 
   return (
     <Collapsible
@@ -140,7 +140,7 @@ const AppMenuItems = ({
         </CollapsibleContent>
       </SidebarMenuItem>
     </Collapsible>
-  );
-};
+  )
+}
 
-export default AppMenuItems;
+export default AppMenuItems

@@ -1,8 +1,8 @@
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
-import { AppSidebar } from '../../components/layout/AppSidebar';
-import { Outlet } from 'react-router-dom';
-import TopHeader from '../../components/layout/TopHeader';
-import { SidebarInset } from '../../components/ui/sidebar';
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
+import { AppSidebar } from '../../components/layout/AppSidebar'
+import { Outlet } from 'react-router-dom'
+import TopHeader from '../../components/layout/TopHeader'
+import { SidebarInset } from '../../components/ui/sidebar'
 
 const Layout = () => {
   return (
@@ -17,7 +17,7 @@ const Layout = () => {
         </main>
       </SidebarInset>
     </SidebarProvider>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout
