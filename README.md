@@ -1,12 +1,146 @@
-# React + Vite
+````
+# DMS_FlowDocs
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Document Management System (DMS) Frontend**
 
-Currently, two official plugins are available:
+DMS_FlowDocs is a web-based Document Management System (DMS) frontend built using **React JS**, **Tailwind CSS**, and **ShadCN UI components**. This system allows users to **upload, view, tag, search, preview, and download documents** efficiently. It integrates with a backend API for authentication and document management.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 📂 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **User Authentication via OTP**
+  - Login using a mobile number.
+  - OTP validation for secure login.
+- **Document Management**
+  - Upload documents.
+  - Search and filter documents.
+  - Preview and download documents.
+  - Tag documents for easy categorization.
+- **Responsive UI**
+  - Works seamlessly on desktop and mobile.
+- **Lightweight & Fast**
+  - Built with React and Tailwind for speed and flexibility.
+
+---
+
+## 🛠️ Technology Stack
+
+- **Frontend:** React JS, Tailwind CSS, ShadCN UI
+- **State Management:** React Hooks
+- **Routing:** React Router v6
+- **HTTP Requests:** Axios
+- **Cookie Handling:** js-cookie
+- **Icons:** Lucide-react
+
+---
+
+## ⚡ Quick Start
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/SauravkuSingh/DMS_FlowDocs.git
+cd DMS_FlowDocs
+````
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Setup Environment Variables
+
+Create a `.env` file at the root of the project with the following variable:
+
+```
+VITE_SERVER_URL=<YOUR_BACKEND_API_URL>
+```
+
+### 4. Run the application
+
+```bash
+npm run dev
+```
+
+Open your browser at [http://localhost:5173](http://localhost:5173) to view the application.
+
+---
+
+## 👤 Login Details
+
+You can use the following mobile number to login:
+
+```
+Mobile Number: 7415727270
+```
+
+> Note: OTP will be sent to this number (use backend API simulation if needed).
+
+---
+
+## 🔗 API Endpoints
+
+* **Generate OTP:** `POST /generateOTP`
+
+  ```json
+  {
+    "mobile_number": "7415727270"
+  }
+  ```
+
+* **Validate OTP:** `POST /validateOTP`
+
+  ```json
+  {
+    "mobile_number": "7415727270",
+    "otp": "<ENTER_OTP>"
+  }
+  ```
+
+---
+
+## 📝 Folder Structure
+
+```
+DMS_FlowDocs/
+├─ public/
+├─ src/
+│  ├─ components/    # Reusable components
+│  ├─ pages/         # Page-level components
+│  ├─ services/      # API service functions
+│  ├─ ui/            # ShadCN UI wrapper components
+│  └─ App.jsx        # Root component
+├─ package.json
+└─ vite.config.js
+```
+
+---
+
+## 📌 Notes
+
+* Ensure your backend API is running and accessible via `VITE_SERVER_URL`.
+* The login is OTP-based, so simulate OTP if backend is unavailable.
+* This project is strictly frontend-focused; backend uses .NET and MySQL.
+
+---
+
+## ✅ Author
+
+**Saurav Singh**
+GitHub: [https://github.com/SauravkuSingh](https://github.com/SauravkuSingh)
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+```
+
+---
+
+If you want, I can also **create a super user-friendly “Manual” section** inside this README with step-by-step screenshots of **logging in, uploading, and previewing documents**—so anyone can use it like an actual manual.  
+
+Do you want me to do that?
+```
