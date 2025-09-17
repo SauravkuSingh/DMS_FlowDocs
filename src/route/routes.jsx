@@ -14,7 +14,7 @@ const routes = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/" element={<Layout />}>
-        <Route index element={<Navigate to="dashboard" replace />} />  
+        <Route index element={<Navigate to="dashboard" replace />} />
         <Route path="dashboard" element={<DashboardPage />} />
       </Route>
 
@@ -26,6 +26,5 @@ const routes = createBrowserRouter(
     </Route>
   )
 )
-
 
 export default routes

@@ -1,12 +1,12 @@
 // src/api.js
-import axios from "axios";
+import axios from 'axios'
 
 // create axios instance
 const api = axios.create({
   baseURL: import.meta.env.VITE_SERVER_URL,
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
-});
+})
 
-export default api;
+export default api

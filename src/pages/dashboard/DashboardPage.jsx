@@ -133,7 +133,7 @@ const DashboardPage = () => {
           <AddDocumentDialog />
         </div>
       </div>
-      <DocTable/>
+      <DocTable />
     </div>
   )
 }

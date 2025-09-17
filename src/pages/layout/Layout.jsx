@@ -7,16 +7,15 @@ import Cookies from 'js-cookie'
 import { useEffect } from 'react'
 
 const Layout = () => {
-
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   useEffect(() => {
-    const token = Cookies.get("token");
+    const token = Cookies.get('token')
     if (token) {
-      navigate("/dashboard", { replace: true });  
+      navigate('/dashboard', { replace: true })
     } else {
-      navigate("/auth/login", { replace: true });
+      navigate('/auth/login', { replace: true })
     }
-  }, [navigate]);
+  }, [navigate])
 
   return (
     <SidebarProvider>

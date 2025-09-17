@@ -16,7 +16,13 @@ function SelectValue({ ...props }) {
   return <SelectPrimitive.Value data-slot="select-value" {...props} />
 }
 
-function SelectTrigger({ className, size = 'default', children, hideIcon = false, ...props }) {
+function SelectTrigger({
+  className,
+  size = 'default',
+  children,
+  hideIcon = false,
+  ...props
+}) {
   return (
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
