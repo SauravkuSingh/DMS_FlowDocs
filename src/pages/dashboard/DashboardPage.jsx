@@ -51,6 +51,7 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import AddDocumentDialog from '@/components/dashboard/AddDocumentDialog'
+import DocTable from '@/components/dashboard/table/DocTable'
 
 const DashboardPage = () => {
   const [isMobile, setIsMobile] = useState(false)
@@ -132,6 +133,7 @@ const DashboardPage = () => {
           <AddDocumentDialog />
         </div>
       </div>
+      <DocTable/>
     </div>
   )
 }

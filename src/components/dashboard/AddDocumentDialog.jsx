@@ -185,16 +185,22 @@ const AddDocumentDialog = () => {
                   </DropdownMenuSubTrigger>
                   <DropdownMenuSubContent className="animate-in fade-in-50 zoom-in-95 duration-200">
                     <DropdownMenuItem
-                      onClick={() => setCategory('Personal - Family')}
+                      onClick={() => setCategory('Personal - John')}
                       className="cursor-pointer hover:bg-purple-50"
                     >
-                      Family
+                      John
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      onClick={() => setCategory('Personal - Friends')}
+                      onClick={() => setCategory('Personal - Emily')}
                       className="cursor-pointer hover:bg-purple-50"
                     >
-                      Friends
+                      Emily
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => setCategory('Personal - Tom')}
+                      className="cursor-pointer hover:bg-purple-50"
+                    >
+                      Tom
                     </DropdownMenuItem>
                   </DropdownMenuSubContent>
                 </DropdownMenuSub>
@@ -204,16 +210,34 @@ const AddDocumentDialog = () => {
                   </DropdownMenuSubTrigger>
                   <DropdownMenuSubContent className="animate-in fade-in-50 zoom-in-95 duration-200">
                     <DropdownMenuItem
-                      onClick={() => setCategory('Professional - Work')}
+                      onClick={() => setCategory('Professional - HR')}
                       className="cursor-pointer hover:bg-purple-50"
                     >
-                      Work
+                      HR
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      onClick={() => setCategory('Professional - Business')}
+                      onClick={() => setCategory('Professional - Finance')}
                       className="cursor-pointer hover:bg-purple-50"
                     >
-                      Business
+                     Finance
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => setCategory('Professional - Sales')}
+                      className="cursor-pointer hover:bg-purple-50"
+                    >
+                      Sales
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => setCategory('Professional - Marketing')}
+                      className="cursor-pointer hover:bg-purple-50"
+                    >
+                      Marketing
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => setCategory('Professional - Design')}
+                      className="cursor-pointer hover:bg-purple-50"
+                    >
+                      Design
                     </DropdownMenuItem>
                   </DropdownMenuSubContent>
                 </DropdownMenuSub>
