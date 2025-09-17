@@ -13,24 +13,9 @@ import {
 import { useEffect, useRef, useState } from 'react'
 import AppMenuItems from './AppMenuItems'
 
-import {
-  Home,
-  Package,
-  Users,
-  Tag,
-  ShoppingCart,
-  ClipboardList,
-  DollarSign,
-  BarChart2,
-  Megaphone,
-  Settings,
-  Store,
-  ShoppingBag,
-  AppWindow,
-  PlusSquare,
-  ChevronLeft,
-} from 'lucide-react'
+import { Home, Settings, ChevronLeft, Users, ClipboardList } from 'lucide-react'
 import { SidebarTrigger } from '../ui/sidebar'
+import SettingsOptions from './SettingsOptions'
 
 const items = [
   {
@@ -39,6 +24,20 @@ const items = [
     isActive: false,
     iconActive: <Home className="h-[18px] w-[18px]" />,
     iconInactive: <Home className="h-[18px] w-[18px]" />,
+  },
+  {
+    title: 'User Management',
+    url: '#users',
+    isActive: false,
+    iconActive: <Users className="h-[18px] w-[18px]" />,
+    iconInactive: <Users className="h-[18px] w-[18px]" />,
+  },
+  {
+    title: 'Reports',
+    url: '#reports',
+    isActive: false,
+    iconActive: <ClipboardList className="h-[18px] w-[18px]" />,
+    iconInactive: <ClipboardList className="h-[18px] w-[18px]" />,
   },
 ]
 
@@ -164,16 +163,7 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter className="max-w-full overflow-hidden bg-gray-50">
         <SidebarMenu className="max-w-full overflow-hidden">
-          <SidebarMenuItem
-            className={`relative ${!open ? 'p-2' : 'p-2 px-4'} flex h-9 cursor-pointer items-center gap-2 overflow-hidden rounded-md hover:bg-slate-200`}
-          >
-            <Settings className="w-[18px]" />
-            <span
-              className={`absolute left-11 text-sm whitespace-nowrap text-slate-700`}
-            >
-              Settings
-            </span>
-          </SidebarMenuItem>
+          <SettingsOptions open={open} />
         </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
