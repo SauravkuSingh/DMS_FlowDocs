@@ -1,23 +1,65 @@
-import React, { useState, useEffect } from 'react';
-import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from '@/components/ui/table';
-import { FileSpreadsheet, MessageSquare, MoreVertical, Download, Trash, Pencil, ChevronsUpDown, Calendar, Search, Filter, CalendarIcon, Eye } from 'lucide-react';
-import { BiMessageDetail } from 'react-icons/bi';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Calendar as CalendarComponent } from '@/components/ui/calendar';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import React, { useState, useEffect } from 'react'
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableHead,
+  TableRow,
+  TableCell,
+} from '@/components/ui/table'
+import {
+  FileSpreadsheet,
+  MessageSquare,
+  MoreVertical,
+  Download,
+  Trash,
+  Pencil,
+  ChevronsUpDown,
+  Calendar,
+  Search,
+  Filter,
+  CalendarIcon,
+  Eye,
+} from 'lucide-react'
+import { BiMessageDetail } from 'react-icons/bi'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Calendar as CalendarComponent } from '@/components/ui/calendar'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 
 export default function DocTable() {
-  const [selectedDocs, setSelectedDocs] = useState([]);
-  const [selectAll, setSelectAll] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [categoryFilter, setCategoryFilter] = useState('all');
-  const [statusFilter, setStatusFilter] = useState('all');
-  const [fromDate, setFromDate] = useState(null);
-  const [toDate, setToDate] = useState(null);
+  const [selectedDocs, setSelectedDocs] = useState([])
+  const [selectAll, setSelectAll] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [categoryFilter, setCategoryFilter] = useState('all')
+  const [statusFilter, setStatusFilter] = useState('all')
+  const [fromDate, setFromDate] = useState(null)
+  const [toDate, setToDate] = useState(null)
 
   const documents = [
     {
@@ -128,119 +170,139 @@ export default function DocTable() {
       status: 'In Progress',
       category: 'Launch',
     },
-  ];
+  ]
 
   const handleSelectAll = () => {
     if (selectAll) {
-      setSelectedDocs([]);
+      setSelectedDocs([])
     } else {
-      setSelectedDocs(filteredDocuments.map(doc => doc.id));
+      setSelectedDocs(filteredDocuments.map((doc) => doc.id))
     }
-    setSelectAll(!selectAll);
-  };
+    setSelectAll(!selectAll)
+  }
 
   const handleSelectDoc = (id) => {
     if (selectedDocs.includes(id)) {
-      setSelectedDocs(selectedDocs.filter(docId => docId !== id));
-      setSelectAll(false);
+      setSelectedDocs(selectedDocs.filter((docId) => docId !== id))
+      setSelectAll(false)
     } else {
-      setSelectedDocs([...selectedDocs, id]);
+      setSelectedDocs([...selectedDocs, id])
       if (selectedDocs.length + 1 === filteredDocuments.length) {
-        setSelectAll(true);
+        setSelectAll(true)
       }
     }
-  };
+  }
 
   const handleDownload = (id) => {
-    console.log(`Downloading document with ID: ${id}`);
-  };
+    console.log(`Downloading document with ID: ${id}`)
+  }
 
   const handleDownloadSelected = () => {
-    console.log(`Downloading selected documents: ${selectedDocs.join(', ')}`);
-  };
+    console.log(`Downloading selected documents: ${selectedDocs.join(', ')}`)
+  }
 
-  const [previewDoc, setPreviewDoc] = useState(null);
+  const [previewDoc, setPreviewDoc] = useState(null)
   const isPreviewable = (fileName) => {
-    const lower = fileName.toLowerCase();
-    return lower.endsWith('.pdf') || lower.endsWith('.jpg') || lower.endsWith('.jpeg') || lower.endsWith('.png') || lower.endsWith('.gif') || lower.endsWith('.webp');
-  };
+    const lower = fileName.toLowerCase()
+    return (
+      lower.endsWith('.pdf') ||
+      lower.endsWith('.jpg') ||
+      lower.endsWith('.jpeg') ||
+      lower.endsWith('.png') ||
+      lower.endsWith('.gif') ||
+      lower.endsWith('.webp')
+    )
+  }
 
-  const filteredDocuments = documents.filter(doc => {
-
-    const matchesSearch = searchQuery === '' || 
+  const filteredDocuments = documents.filter((doc) => {
+    const matchesSearch =
+      searchQuery === '' ||
       doc.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       doc.owner.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      doc.category.toLowerCase().includes(searchQuery.toLowerCase());
+      doc.category.toLowerCase().includes(searchQuery.toLowerCase())
 
-    const matchesCategory = categoryFilter === 'all' || doc.category === categoryFilter;
+    const matchesCategory =
+      categoryFilter === 'all' || doc.category === categoryFilter
 
-    const matchesStatus = statusFilter === 'all' || doc.status === statusFilter;
-    
-    const docDate = new Date(doc.dateCreated.split(' ')[0]);
-    const matchesFromDate = !fromDate || docDate >= fromDate;
-    const matchesToDate = !toDate || docDate <= toDate;
-    
-    return matchesSearch && matchesCategory && matchesStatus && matchesFromDate && matchesToDate;
-  });
+    const matchesStatus = statusFilter === 'all' || doc.status === statusFilter
+
+    const docDate = new Date(doc.dateCreated.split(' ')[0])
+    const matchesFromDate = !fromDate || docDate >= fromDate
+    const matchesToDate = !toDate || docDate <= toDate
+
+    return (
+      matchesSearch &&
+      matchesCategory &&
+      matchesStatus &&
+      matchesFromDate &&
+      matchesToDate
+    )
+  })
 
   useEffect(() => {
-    setSelectAll(false);
-    setSelectedDocs([]);
-  }, [searchQuery, categoryFilter, statusFilter, fromDate, toDate]);
+    setSelectAll(false)
+    setSelectedDocs([])
+  }, [searchQuery, categoryFilter, statusFilter, fromDate, toDate])
 
-  const categories = [...new Set(documents.map(doc => doc.category))];
-  const statuses = [...new Set(documents.map(doc => doc.status))];
+  const categories = [...new Set(documents.map((doc) => doc.category))]
+  const statuses = [...new Set(documents.map((doc) => doc.status))]
 
   const FileIcon = ({ fileName }) => {
     if (fileName.endsWith('.pdf')) {
-      return <FileSpreadsheet className="h-5 w-5 text-red-500" />;
-    } else if (fileName.endsWith('.jpg') || fileName.endsWith('.png') || fileName.endsWith('.jpeg')) {
-      return <FileSpreadsheet className="h-5 w-5 text-blue-500" />;
+      return <FileSpreadsheet className="h-5 w-5 text-red-500" />
+    } else if (
+      fileName.endsWith('.jpg') ||
+      fileName.endsWith('.png') ||
+      fileName.endsWith('.jpeg')
+    ) {
+      return <FileSpreadsheet className="h-5 w-5 text-blue-500" />
     } else {
-      return <FileSpreadsheet className="h-5 w-5 text-gray-500" />;
+      return <FileSpreadsheet className="h-5 w-5 text-gray-500" />
     }
-  };
+  }
 
   const StatusBadge = ({ status }) => {
-    let bgColor = '';
-    let textColor = '';
+    let bgColor = ''
+    let textColor = ''
 
     switch (status) {
       case 'Approved':
-        bgColor = 'bg-green-100';
-        textColor = 'text-green-800';
-        break;
+        bgColor = 'bg-green-100'
+        textColor = 'text-green-800'
+        break
       case 'In Review':
-        bgColor = 'bg-yellow-100';
-        textColor = 'text-yellow-800';
-        break;
+        bgColor = 'bg-yellow-100'
+        textColor = 'text-yellow-800'
+        break
       case 'Published':
-        bgColor = 'bg-blue-100';
-        textColor = 'text-blue-800';
-        break;
+        bgColor = 'bg-blue-100'
+        textColor = 'text-blue-800'
+        break
       case 'Draft':
-        bgColor = 'bg-gray-100';
-        textColor = 'text-gray-800';
-        break;
+        bgColor = 'bg-gray-100'
+        textColor = 'text-gray-800'
+        break
       case 'In Progress':
-        bgColor = 'bg-purple-100';
-        textColor = 'text-purple-800';
-        break;
+        bgColor = 'bg-purple-100'
+        textColor = 'text-purple-800'
+        break
       case 'Confidential':
-        bgColor = 'bg-red-100';
-        textColor = 'text-red-800';
-        break;
+        bgColor = 'bg-red-100'
+        textColor = 'text-red-800'
+        break
       default:
-        bgColor = 'bg-gray-100';
-        textColor = 'text-gray-800';
+        bgColor = 'bg-gray-100'
+        textColor = 'text-gray-800'
     }
 
     return (
-      <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${bgColor} ${textColor}`}>
+      <span
+        className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${bgColor} ${textColor}`}
+      >
         {status}
       </span>
-    );
-  };
+    )
+  }
 
   return (
     <div className="space-y-4">
@@ -250,12 +312,12 @@ export default function DocTable() {
           <Input
             type="text"
             placeholder="Search documents..."
-            className="pl-8 pr-4"
+            className="pr-4 pl-8"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        
+
         <div className="flex flex-wrap gap-2">
           <Select value={categoryFilter} onValueChange={setCategoryFilter}>
             <SelectTrigger className="w-[140px]" hideIcon>
@@ -263,29 +325,36 @@ export default function DocTable() {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Categories</SelectItem>
-              {categories.map(category => (
-                <SelectItem key={category} value={category}>{category}</SelectItem>
+              {categories.map((category) => (
+                <SelectItem key={category} value={category}>
+                  {category}
+                </SelectItem>
               ))}
             </SelectContent>
           </Select>
-          
+
           <Select value={statusFilter} onValueChange={setStatusFilter}>
             <SelectTrigger className="w-[140px]" hideIcon>
               <SelectValue placeholder="Status" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Tags</SelectItem>
-              {statuses.map(status => (
-                <SelectItem key={status} value={status}>{status}</SelectItem>
+              {statuses.map((status) => (
+                <SelectItem key={status} value={status}>
+                  {status}
+                </SelectItem>
               ))}
             </SelectContent>
           </Select>
-          
+
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="outline" className="w-[140px] justify-start text-left font-normal">
+              <Button
+                variant="outline"
+                className="w-[140px] justify-start text-left font-normal"
+              >
                 <CalendarIcon className="mr-2 h-4 w-4" />
-                {fromDate ? fromDate.toLocaleDateString() : "From Date"}
+                {fromDate ? fromDate.toLocaleDateString() : 'From Date'}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
@@ -300,9 +369,12 @@ export default function DocTable() {
 
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="outline" className="w-[140px] justify-start text-left font-normal">
+              <Button
+                variant="outline"
+                className="w-[140px] justify-start text-left font-normal"
+              >
                 <CalendarIcon className="mr-2 h-4 w-4" />
-                {toDate ? toDate.toLocaleDateString() : "To Date"}
+                {toDate ? toDate.toLocaleDateString() : 'To Date'}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
@@ -314,16 +386,20 @@ export default function DocTable() {
               />
             </PopoverContent>
           </Popover>
-          
-          {(searchQuery || categoryFilter !== 'all' || statusFilter !== 'all' || fromDate || toDate) && (
-            <Button 
-              variant="ghost" 
+
+          {(searchQuery ||
+            categoryFilter !== 'all' ||
+            statusFilter !== 'all' ||
+            fromDate ||
+            toDate) && (
+            <Button
+              variant="ghost"
               onClick={() => {
-                setSearchQuery('');
-                setCategoryFilter('all');
-                setStatusFilter('all');
-                setFromDate(null);
-                setToDate(null);
+                setSearchQuery('')
+                setCategoryFilter('all')
+                setStatusFilter('all')
+                setFromDate(null)
+                setToDate(null)
               }}
               className="text-sm"
             >
@@ -332,12 +408,14 @@ export default function DocTable() {
           )}
         </div>
       </div>
-      
+
       <div className="overflow-hidden rounded-lg border">
         {selectedDocs.length > 0 && (
-          <div className="p-2 bg-gray-50 flex items-center justify-between">
-            <span className="text-sm text-gray-700">{selectedDocs.length} document(s) selected</span>
-            <button 
+          <div className="flex items-center justify-between bg-gray-50 p-2">
+            <span className="text-sm text-gray-700">
+              {selectedDocs.length} document(s) selected
+            </span>
+            <button
               onClick={handleDownloadSelected}
               className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800"
             >
@@ -350,8 +428,8 @@ export default function DocTable() {
             <TableRow>
               <TableHead className="w-12">
                 <div className="flex items-center justify-center">
-                  <input 
-                    type="checkbox" 
+                  <input
+                    type="checkbox"
                     checked={selectAll && filteredDocuments.length > 0}
                     onChange={handleSelectAll}
                     className="rounded border-gray-300"
@@ -409,8 +487,8 @@ export default function DocTable() {
               filteredDocuments.map((document) => (
                 <TableRow key={document.id}>
                   <TableCell>
-                    <input 
-                      type="checkbox" 
+                    <input
+                      type="checkbox"
                       checked={selectedDocs.includes(document.id)}
                       onChange={() => handleSelectDoc(document.id)}
                       className="rounded border-gray-300"
@@ -430,19 +508,30 @@ export default function DocTable() {
                             <Eye className="h-4 w-4" />
                           </button>
                         </DialogTrigger>
-                        <DialogContent className="max-w-3xl w-[calc(100%-2rem)]">
+                        <DialogContent className="w-[calc(100%-2rem)] max-w-3xl">
                           <DialogHeader>
-                            <DialogTitle>Preview: {previewDoc?.name}</DialogTitle>
+                            <DialogTitle>
+                              Preview: {previewDoc?.name}
+                            </DialogTitle>
                           </DialogHeader>
                           {previewDoc && isPreviewable(previewDoc.name) ? (
                             previewDoc.name.toLowerCase().endsWith('.pdf') ? (
-                              <iframe title="PDF preview" className="h-[70vh] w-full rounded" src={`/${encodeURIComponent(previewDoc.name)}`} />
+                              <iframe
+                                title="PDF preview"
+                                className="h-[70vh] w-full rounded"
+                                src={`/${encodeURIComponent(previewDoc.name)}`}
+                              />
                             ) : (
-                              <img alt={previewDoc.name} className="max-h-[70vh] w-auto rounded" src={`/${encodeURIComponent(previewDoc.name)}`} />
+                              <img
+                                alt={previewDoc.name}
+                                className="max-h-[70vh] w-auto rounded"
+                                src={`/${encodeURIComponent(previewDoc.name)}`}
+                              />
                             )
                           ) : (
                             <div className="text-sm text-gray-600">
-                              Preview is not available for this file type. Please download to view.
+                              Preview is not available for this file type.
+                              Please download to view.
                             </div>
                           )}
                         </DialogContent>
@@ -464,13 +553,16 @@ export default function DocTable() {
                           <MoreVertical className="h-4 w-4 cursor-pointer text-gray-500" />
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                          <DropdownMenuItem onClick={() => handleDownload(document.id)} className="cursor-pointer">
-                            <Download className="h-4 w-4 mr-2" />
+                          <DropdownMenuItem
+                            onClick={() => handleDownload(document.id)}
+                            className="cursor-pointer"
+                          >
+                            <Download className="mr-2 h-4 w-4" />
                             Download
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
                           <DropdownMenuItem className="cursor-pointer text-red-600">
-                            <Trash className="h-4 w-4 mr-2" />
+                            <Trash className="mr-2 h-4 w-4" />
                             Delete
                           </DropdownMenuItem>
                         </DropdownMenuContent>
@@ -484,5 +576,5 @@ export default function DocTable() {
         </Table>
       </div>
     </div>
-  );
+  )
 }

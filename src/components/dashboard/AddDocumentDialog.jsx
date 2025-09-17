@@ -219,7 +219,7 @@ const AddDocumentDialog = () => {
                       onClick={() => setCategory('Professional - Finance')}
                       className="cursor-pointer hover:bg-purple-50"
                     >
-                     Finance
+                      Finance
                     </DropdownMenuItem>
                     <DropdownMenuItem
                       onClick={() => setCategory('Professional - Sales')}
