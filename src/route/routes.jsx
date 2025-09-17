@@ -13,9 +13,9 @@ import SignUp from '@/components/auth/SignUp'
 const routes = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route element={<Layout />}>
-        <Route index element={<Navigate to="dashboard" replace />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Navigate to="dashboard" replace />} />  
+        <Route path="dashboard" element={<DashboardPage />} />
       </Route>
 
       <Route path="/auth" element={<AuthLayout />}>

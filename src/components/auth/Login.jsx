@@ -2,9 +2,13 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import { userAuthByOtp, validateOtp } from "@/services/user.services";
+import Cookies from "js-cookie";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   const [mobileNumber, setMobileNumber] = useState("");
   const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
@@ -14,34 +18,57 @@ export default function LoginPage() {
   const handleSendOtp = async (e) => {
     e.preventDefault();
     if (!mobileNumber || mobileNumber.length < 10) {
-      alert("Please enter a valid mobile number");
+      toast.error("Please enter a valid mobile number !")
       return;
     }
-    
-    setOtpLoading(true);
-
-    setTimeout(() => {
-      console.log("OTP sent to:", mobileNumber);
-      setOtpSent(true);
+    try {
+     
+     setOtpLoading(true);
+     const res = await userAuthByOtp(mobileNumber);
+     if (!res || !res.status) {
+      throw new Error("Something went wrong");
+    }
+     console.log("OTP sent res is : ", res);
+     toast.success("OPT send successfully !")
+     setOtpSent(true);
+     setOtpLoading(false);
+    } catch (error) {
+      console.error("Error sending OTP:", error);
+      toast.error("Error during sending OTP !")
       setOtpLoading(false);
-    }, 2000);
+    }
   };
-
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
     if (!otp || otp.length !== 6) {
-      alert("Please enter a valid 6-digit OTP");
+      toast.error("Please enter a valid 6-digit OTP!");
       return;
     }
-    
     setLoading(true);
-
-    setTimeout(() => {
-      console.log("OTP verified for:", mobileNumber);
+    try {
+      const res = await validateOtp(mobileNumber, otp);
+      if (!res || !res.status) {
+        throw new Error("Something went wrong");
+      }
+      console.log("User phone number with OTP verified:", res);
+      toast.success("Successfully OTP verified!");
+      const token = res?.data?.token;
+      if (token) {
+        // set cookie
+        Cookies.set("token", token);
+        navigate("/");
+      } else {
+        toast.error("Token not found in response");
+        throw new Error("Token not found in response");
+      }
+    } catch (error) {
+      console.error("Error during OTP verification:", error);
+      toast.error(error.message || "Error during OTP verification!");
+    } finally {
       setLoading(false);
-    }, 1500);
+    }
   };
-
+  
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
