@@ -116,20 +116,9 @@ const DashboardPage = () => {
             <FileText className="h-6 w-6 text-purple-600" />
             <span>Documents</span>
           </h2>
-          <div className="hidden items-center gap-2 rounded-full bg-gray-50 px-3 py-1 text-sm text-gray-500 md:flex">
-            <span className="font-medium">9</span> documents found
-          </div>
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
-          <Button
-            variant="outline"
-            className="flex items-center gap-2 transition-all duration-200 hover:bg-gray-50 hover:text-gray-900"
-          >
-            <Download className="h-4 w-4" />
-            <span className="hidden sm:inline">Export</span>
-          </Button>
-
           <AddDocumentDialog />
         </div>
       </div>

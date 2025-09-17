@@ -50,6 +50,7 @@ export default function LoginPage() {
       }
       console.log('User phone number with OTP verified:', res)
       toast.success('Successfully OTP verified!')
+      localStorage.setItem('userId', res?.data?.user_id)
       const token = res?.data?.token
       if (token) {
         // set cookie
